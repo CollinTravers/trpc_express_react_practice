@@ -27,7 +27,17 @@ const appRouter = t.router({
     //We want to log this mutation and then return true to say it was performed successfully
     console.log(`Client Says: ${req.input.v}`)
     return true
-  })
+  }),
+  returnValue: t.procedure
+    .input(
+      z.object({
+        v: z.string(),
+      }),
+    ).mutation(req => {
+      console.log(req.input.v)
+      return req.input.v
+    })
+
 })
 
 //express specific code
